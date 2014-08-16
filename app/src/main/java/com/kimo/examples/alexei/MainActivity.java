@@ -1,19 +1,26 @@
 package com.kimo.examples.alexei;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.kimo.lib.alexei.Alexei;
 import com.kimo.lib.alexei.ImageProcessingThing;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends FragmentActivity {
 
     private ImageView mImageView;
+    private View mMainColor;
+    private LinearLayout mPalleteContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +33,31 @@ public class MainActivity extends Activity {
 
     private void configure() {
         mImageView = (ImageView) findViewById(R.id.imageView);
+        mMainColor = findViewById(R.id.average_color);
+        mPalleteContainer = (LinearLayout) findViewById(R.id.pallete_container);
     }
 
     private void doStuff() {
-        Color mainColor = Alexei.analize(mImageView).andAnswer(ImageProcessingThing.AVERAGE_RGB);
+        Integer calculatedMainColor = (Integer) Alexei.analize(mImageView).calculate(ImageProcessingThing.AVERAGE_RGB).andTellMeTheResult();
+
+        List<Integer> calculatedColorPallete = (ArrayList<Integer>) Alexei.analize(mImageView).calculate(ImageProcessingThing.COLOR_PALLETE).andTellMeTheResult();
+
+        fillPalleteColors(calculatedColorPallete);
+
+        mMainColor.setBackgroundColor(calculatedMainColor);
+    }
+
+    private void fillPalleteColors(List<Integer> colors) {
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        for(int color : colors) {
+
+            View palleteColor = inflater.inflate(R.layout.item_pallete, mPalleteContainer, false);
+            palleteColor.setBackgroundColor(color);
+
+            mPalleteContainer.addView(palleteColor);
+        }
     }
 
 
@@ -51,4 +79,5 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

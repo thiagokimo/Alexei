@@ -22,4 +22,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
+    compile 'com.github.johnkil.android-progressfragment:progressfragment:1.4.+'
 }

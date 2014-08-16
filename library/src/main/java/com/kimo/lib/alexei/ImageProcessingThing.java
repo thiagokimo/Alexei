@@ -9,4 +9,7 @@ public class ImageProcessingThing {
 
     // Median cut algorithm
     public static final int AVERAGE_RGB = 0;
+
+    // Color pallete of an image
+    public static final int COLOR_PALLETE = 1;
 }

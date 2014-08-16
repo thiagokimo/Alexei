@@ -29,16 +29,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Main Color"
+            android:text="Average Color:"
             android:textStyle="bold"
-            android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"/>
 
-        <ImageView
-            android:id="@+id/main_color"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+        <View
+            android:id="@+id/average_color"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pallete:"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"/>
+
+        <LinearLayout
+            android:id="@+id/pallete_container"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
     </LinearLayout>
 
 
