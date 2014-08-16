@@ -16,8 +16,18 @@ public class Alexei {
 
     private ImageView mImageView;
 
-    Alexei(ImageView image) {
+    private Alexei(ImageView image) {
         mImageView = image;
+    }
+
+    public static Alexei analize(ImageView someImage) {
+        if (singleton == null)
+            synchronized (Alexei.class) {
+                if (singleton == null)
+                    singleton = new Alexei(someImage);
+            }
+
+        return singleton;
     }
 
     public AlexeiAnswer calculate(int thing) {
@@ -29,15 +39,5 @@ public class Alexei {
             default:
                 throw new IllegalArgumentException("I still don't know this!");
         }
-    }
-
-    public static Alexei analize(ImageView someImage) {
-        if (singleton == null) {
-            synchronized (Alexei.class) {
-                if (singleton == null)
-                    singleton = new Alexei(someImage);
-            }
-        }
-        return singleton;
     }
 }
