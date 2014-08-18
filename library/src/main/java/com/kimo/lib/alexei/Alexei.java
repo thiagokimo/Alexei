@@ -1,9 +1,7 @@
 package com.kimo.lib.alexei;
 
+import android.content.Context;
 import android.widget.ImageView;
-
-import com.kimo.lib.alexei.imageprocessingthings.AverageColor;
-import com.kimo.lib.alexei.imageprocessingthings.ColorScheme;
 
 /**
  * Created by Kimo on 8/14/14.
@@ -14,30 +12,40 @@ public class Alexei {
 
     static Alexei singleton = null;
 
-    private ImageView mImageView;
+    final Context mContext;
 
-    private Alexei(ImageView image) {
-        mImageView = image;
+
+    private Alexei(Context context) {
+        mContext = context;
     }
 
-    public static Alexei analize(ImageView someImage) {
-        if (singleton == null)
+    public static Alexei with(Context context) {
+        if(singleton == null)
             synchronized (Alexei.class) {
-                if (singleton == null)
-                    singleton = new Alexei(someImage);
+                if(singleton == null)
+                    singleton = new Builder(context).build();
             }
-
         return singleton;
     }
 
-    public AlexeiAnswer calculate(int thing) {
-        switch (thing) {
-            case ImageProcessingThing.AVERAGE_RGB:
-                return new AverageColor(mImageView);
-            case ImageProcessingThing.COLOR_PALLETE:
-                return new ColorScheme(mImageView);
-            default:
-                throw new IllegalArgumentException("I still don't know this!");
+    public RequestProcess analize(ImageView image) {
+        return new RequestProcess(this, image, 0);
+    }
+
+    public static class Builder {
+        private final Context context;
+
+        public Builder(Context context) {
+
+            if(context == null)
+                throw new IllegalArgumentException("Context must not be null");
+
+            this.context = context.getApplicationContext();
+        }
+
+        public Alexei build() {
+
+            return new Alexei(this.context);
         }
     }
 }

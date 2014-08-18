@@ -17,45 +17,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <FrameLayout
+        android:id="@+id/report_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Average Color:"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"/>
-
-        <View
-            android:id="@+id/average_color"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="15dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pallete:"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"/>
-
-        <LinearLayout
-            android:id="@+id/pallete_container"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

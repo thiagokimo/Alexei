@@ -1,16 +1,16 @@
-package com.kimo.lib.alexei.imageprocessingthings;
+package com.kimo.lib.alexei.calculus;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
 
-import com.kimo.lib.alexei.AlexeiAnswer;
+import com.kimo.lib.alexei.Calculus;
+import com.kimo.lib.alexei.helpers.PixelUtils;
 
 /**
  * Created by Kimo on 8/15/14.
  */
-public class AverageColor extends AlexeiAnswer {
+public class AverageColor extends Calculus {
 
     public static final String TAG = AverageColor.class.getSimpleName();
 
@@ -21,8 +21,9 @@ public class AverageColor extends AlexeiAnswer {
     }
 
     @Override
-    protected void calculate(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+    protected void theCalculation(ImageView image) {
+
+        Bitmap bitmap = PixelUtils.getBitmapFromImageView(image);
 
         if (null == bitmap) mAverageColor = Color.TRANSPARENT;
         else {
@@ -31,9 +32,9 @@ public class AverageColor extends AlexeiAnswer {
             int red, green, blue;
             red = green = blue = 0;
 
-            for(int i = 0; i < bitmap.getWidth(); i++)
-                for(int j = 0; j < bitmap.getHeight(); j++) {
-                    int pixel = bitmap.getPixel(i,j);
+            for (int i = 0; i < bitmap.getWidth(); i++)
+                for (int j = 0; j < bitmap.getHeight(); j++) {
+                    int pixel = bitmap.getPixel(i, j);
 
                     red += Color.red(pixel);
                     green += Color.green(pixel);
@@ -44,12 +45,13 @@ public class AverageColor extends AlexeiAnswer {
             green /= pixelCount;
             blue /= pixelCount;
 
-            mAverageColor = Color.rgb(red,green,blue);
+            mAverageColor = Color.rgb(red, green, blue);
         }
+
     }
 
     @Override
-    public Integer andTellMeTheResult() {
+    public Integer andGiveMeTheResults() {
         return mAverageColor;
     }
 }
