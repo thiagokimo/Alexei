@@ -1,6 +1,8 @@
 package com.kimo.lib.alexei;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.widget.ImageView;
 
 /**
@@ -11,9 +13,9 @@ public class Alexei {
     public static final String TAG = Alexei.class.getSimpleName();
 
     static Alexei singleton = null;
+    public static Utils UTILS = new Utils();
 
     final Context mContext;
-
 
     private Alexei(Context context) {
         mContext = context;
@@ -30,6 +32,13 @@ public class Alexei {
 
     public RequestProcess analize(ImageView image) {
         return new RequestProcess(this, image, 0);
+    }
+    public RequestProcess analize(Bitmap image) {
+        return new RequestProcess(this, image, 0);
+    }
+
+    public RequestProcess analize(Uri image){
+        return new RequestProcess(this, Utils.getBitmapFromURI(mContext, image), 0);
     }
 
     public static class Builder {

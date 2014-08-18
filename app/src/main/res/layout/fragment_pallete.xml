@@ -54,6 +54,7 @@
             android:layout_marginBottom="15dp"/>
 
         <TextView
+            android:id="@+id/elapsed_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12345 ms"

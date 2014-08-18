@@ -1,11 +1,11 @@
 package com.kimo.lib.alexei.calculus;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 import com.kimo.lib.alexei.Calculus;
+import com.kimo.lib.alexei.Result;
+import com.kimo.lib.alexei.Utils;
 import com.kimo.lib.alexei.algorithms.Quantize;
-import com.kimo.lib.alexei.helpers.PixelUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +19,16 @@ public class ColorPallete extends Calculus{
 
     private List<Integer> mColorPallete;
 
-    public ColorPallete(ImageView image) {
+    public ColorPallete(Bitmap image) {
         super(image);
     }
 
     @Override
-    public void theCalculation(ImageView image) {
+    public void theCalculation(Bitmap image) {
 
-        Bitmap bitmap = PixelUtils.getBitmapFromImageView(image);
         mColorPallete = new ArrayList<Integer>();
 
-        int [][] pixelsMatrix = PixelUtils.getPixelsMatrixFromBitmap(bitmap);
+        int [][] pixelsMatrix = Utils.getPixelsMatrixFromBitmap(image);
         int [] calculatedPallete = Quantize.quantizeImage(pixelsMatrix, NUMBER_OF_COLORS);
 
         for(int x = 0; x < calculatedPallete.length; x++)
@@ -38,7 +37,7 @@ public class ColorPallete extends Calculus{
 
 
     @Override
-    public List<Integer> andGiveMeTheResults() {
-        return mColorPallete;
+    public Result andGiveMeTheResults() {
+        return new Result(mElapsedTime, mColorPallete);
     }
 }

@@ -1,26 +1,30 @@
 package com.kimo.lib.alexei;
 
-import android.widget.ImageView;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 /**
  * Created by Kimo on 8/18/14.
  */
-public abstract class Calculus implements Runnable{
+public abstract class Calculus implements Runnable {
 
-    protected ImageView mImage;
+    protected Bitmap mImage;
     protected long mElapsedTime = 0;
 
-    protected Calculus(ImageView image) {
+    protected Calculus(Bitmap image) {
         mImage = image;
         run();
     }
 
-    protected abstract void theCalculation(ImageView image);
+    protected abstract void theCalculation(Bitmap image);
 
     @Override
     public void run() {
+        Log.d("Calculus", "entrou!!!");
         long startTime, endTime;
+
         startTime = System.currentTimeMillis();
+
         theCalculation(mImage);
         endTime = System.currentTimeMillis();
 
@@ -31,7 +35,7 @@ public abstract class Calculus implements Runnable{
      * Returns
      * @return Object - Object with the result
      */
-    public abstract Object andGiveMeTheResults();
+    public abstract Result andGiveMeTheResults();
 
     public long getElapsedTime() {
         return mElapsedTime;

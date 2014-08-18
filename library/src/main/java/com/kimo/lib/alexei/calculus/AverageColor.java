@@ -2,10 +2,9 @@ package com.kimo.lib.alexei.calculus;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.widget.ImageView;
 
 import com.kimo.lib.alexei.Calculus;
-import com.kimo.lib.alexei.helpers.PixelUtils;
+import com.kimo.lib.alexei.Result;
 
 /**
  * Created by Kimo on 8/15/14.
@@ -16,25 +15,23 @@ public class AverageColor extends Calculus {
 
     private int mAverageColor;
 
-    public AverageColor(ImageView image) {
+    public AverageColor(Bitmap image) {
         super(image);
     }
 
     @Override
-    protected void theCalculation(ImageView image) {
+    protected void theCalculation(Bitmap image) {
 
-        Bitmap bitmap = PixelUtils.getBitmapFromImageView(image);
-
-        if (null == bitmap) mAverageColor = Color.TRANSPARENT;
+        if (null == image) mAverageColor = Color.TRANSPARENT;
         else {
 
-            int pixelCount = bitmap.getWidth() * bitmap.getHeight();
+            int pixelCount = image.getWidth() * image.getHeight();
             int red, green, blue;
             red = green = blue = 0;
 
-            for (int i = 0; i < bitmap.getWidth(); i++)
-                for (int j = 0; j < bitmap.getHeight(); j++) {
-                    int pixel = bitmap.getPixel(i, j);
+            for (int i = 0; i < image.getWidth(); i++)
+                for (int j = 0; j < image.getHeight(); j++) {
+                    int pixel = image.getPixel(i, j);
 
                     red += Color.red(pixel);
                     green += Color.green(pixel);
@@ -51,7 +48,7 @@ public class AverageColor extends Calculus {
     }
 
     @Override
-    public Integer andGiveMeTheResults() {
-        return mAverageColor;
+    public Result andGiveMeTheResults() {
+        return new Result(mElapsedTime, mAverageColor);
     }
 }

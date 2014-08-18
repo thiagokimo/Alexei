@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.lib.alexei.Alexei;
 import com.kimo.lib.alexei.ImageProcessingThing;
+import com.kimo.lib.alexei.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class ColorPalleteFragment extends ProgressFragment {
     public static final String IMAGE_RESOURCE = TAG + ".IMAGE_RESOURCE";
 
     private int mImageResource;
+
+    private TextView mElapsedTimeLabel;
     private List<Integer> mPallete = new ArrayList<Integer>();
     private LinearLayout mPalleteContainer;
 
@@ -36,11 +40,15 @@ public class ColorPalleteFragment extends ProgressFragment {
             ImageView image = new ImageView(getActivity());
             image.setImageResource(mImageResource);
 
-            mPallete = (List<Integer>) Alexei.with(getActivity())
+            Result calculusResult = Alexei.with(getActivity())
                     .analize(image)
                     .calculate(ImageProcessingThing.COLOR_PALLETE)
                     .andGiveMeTheResults();
+
+            mPallete = (List<Integer>) calculusResult.getResult();
             fillPalleteColors(mPallete);
+
+            mElapsedTimeLabel.setText(new StringBuilder().append(calculusResult.getElapsedTime()).append(" milliseconds"));
 
             setContentShown(true);
         }
@@ -72,6 +80,7 @@ public class ColorPalleteFragment extends ProgressFragment {
 
         View mainView = inflater.inflate(R.layout.fragment_pallete, container, false);
         mPalleteContainer = (LinearLayout) mainView.findViewById(R.id.pallete_container);
+        mElapsedTimeLabel = (TextView) mainView.findViewById(R.id.elapsed_time);
 
         return mainView;
     }
@@ -83,7 +92,13 @@ public class ColorPalleteFragment extends ProgressFragment {
         setContentShown(false);
 
         mHandler = new Handler();
-        mHandler.postDelayed(mShowContentRunnable, 3000);
+        mHandler.postDelayed(mShowContentRunnable, 1000);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mHandler.removeCallbacks(mShowContentRunnable);
     }
 
     private void fillPalleteColors(List<Integer> colors) {
