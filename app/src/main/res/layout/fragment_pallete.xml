@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="@dimen/activity_horizontal_margin"
     android:gravity="center">
 
     <LinearLayout
@@ -28,6 +28,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/scarllet"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +66,7 @@
             android:id="@+id/elapsed_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12345 ms"
+            android:text=""
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>

@@ -2,7 +2,6 @@ package com.kimo.lib.alexei;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.widget.ImageView;
 
 /**
@@ -35,10 +34,6 @@ public class Alexei {
     }
     public RequestProcess analize(Bitmap image) {
         return new RequestProcess(this, image, 0);
-    }
-
-    public RequestProcess analize(Uri image){
-        return new RequestProcess(this, Utils.getBitmapFromURI(mContext, image), 0);
     }
 
     public static class Builder {

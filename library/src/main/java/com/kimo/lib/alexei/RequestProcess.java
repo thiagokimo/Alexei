@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.kimo.lib.alexei.calculus.ColorPallete;
+import com.kimo.lib.alexei.calculus.DominantColor;
 
 /**
  * Created by Kimo on 8/18/14.
@@ -29,6 +30,8 @@ public class RequestProcess {
     public Calculus calculate(int calculusFlag) {
         if(calculusFlag == ImageProcessingThing.COLOR_PALLETE)
             return new ColorPallete(mImage);
+        else if(calculusFlag == ImageProcessingThing.DOMINANT_COLOR)
+            return new DominantColor(mImage);
         else
             return null;
     }

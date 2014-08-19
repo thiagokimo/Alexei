@@ -7,8 +7,8 @@ public class ImageProcessingThing {
 
     public static final String TAG = ImageProcessingThing.class.getSimpleName();
 
-    // Median cut algorithm
-    public static final int AVERAGE_RGB = 0;
+    // Dominant color of an image
+    public static final int DOMINANT_COLOR = 0;
 
     // Color pallete of an image
     public static final int COLOR_PALLETE = 1;
