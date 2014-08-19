@@ -1,7 +1,6 @@
 package com.kimo.lib.alexei;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 /**
  * Created by Kimo on 8/18/14.
@@ -20,7 +19,7 @@ public abstract class Calculus implements Runnable {
 
     @Override
     public void run() {
-        Log.d("Calculus", "entrou!!!");
+        
         long startTime, endTime;
 
         startTime = System.currentTimeMillis();

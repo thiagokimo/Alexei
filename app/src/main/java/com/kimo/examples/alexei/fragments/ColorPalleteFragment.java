@@ -1,8 +1,10 @@
 package com.kimo.examples.alexei.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,25 +27,7 @@ public class ColorPalleteFragment extends ProgressFragment {
     private ImageView mImage;
     private TextView mElapsedTimeView;
     private LinearLayout mPalleteContainer;
-    private Handler mHandler;
-    private Runnable mShowContentRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-
-            Result colorPalleteResult = Alexei.with(getActivity())
-                    .analize(mImage)
-                    .calculate(ImageProcessingThing.COLOR_PALLETE)
-                    .andGiveMeTheResults();
-
-            List<Integer> mPallete = (List<Integer>) colorPalleteResult.getResult();
-            fillPalleteColors(mPallete);
-
-            mElapsedTimeView.setText(new StringBuilder().append(colorPalleteResult.getElapsedTime()).append(" milliseconds"));
-            setContentShown(true);
-        }
-
-    };
+    private CalculusExecutor mBackgroundThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,21 +38,31 @@ public class ColorPalleteFragment extends ProgressFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
-        mHandler = new Handler();
-        mHandler.post(mShowContentRunnable);
+        performCalculus();
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
-        mHandler.removeCallbacks(mShowContentRunnable);
+        mBackgroundThread.cancel(true);
     }
 
     private void configure(View view) {
+
+        setHasOptionsMenu(true);
+        mBackgroundThread = new CalculusExecutor();
+
         mImage = (ImageView) view.findViewById(R.id.imageView);
         mPalleteContainer = (LinearLayout) view.findViewById(R.id.pallete_container);
         mElapsedTimeView = (TextView) view.findViewById(R.id.elapsed_time);
@@ -84,6 +78,45 @@ public class ColorPalleteFragment extends ProgressFragment {
             palleteColor.setBackgroundColor(color);
 
             mPalleteContainer.addView(palleteColor);
+        }
+    }
+
+    private void performCalculus() {
+        mBackgroundThread.execute();
+    }
+
+    private class CalculusExecutor extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(!isCancelled())
+                setContentShown(false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            if(!isCancelled()) {
+                Result colorPalleteResult = Alexei.with(getActivity())
+                        .analize(mImage)
+                        .calculate(ImageProcessingThing.COLOR_PALLETE)
+                        .andGiveMeTheResults();
+
+                List<Integer> mPallete = (List<Integer>) colorPalleteResult.getResult();
+                fillPalleteColors(mPallete);
+
+                mElapsedTimeView.setText(new StringBuilder().append(colorPalleteResult.getElapsedTime()).append(" milliseconds"));
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(!isCancelled())
+                setContentShown(true);
         }
     }
 }

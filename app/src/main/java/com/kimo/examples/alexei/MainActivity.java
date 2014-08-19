@@ -80,11 +80,6 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_FROM_GALLERY  && resultCode == Activity.RESULT_OK) {
             Picasso.with(this).load(data.getData()).into(mImageView);
-
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.report_container, new DominantColorFragment())
-//                    .commit();
         }
         else
             Toast.makeText(this, "Error selecting the image from gallery.", Toast.LENGTH_SHORT).show();
