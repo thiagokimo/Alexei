@@ -56,12 +56,12 @@ public class ColorPalleteFragment extends ProgressFragment {
         super.onPause();
 
         mBackgroundThread.cancel(true);
+        mBackgroundThread = null;
     }
 
     private void configure(View view) {
 
         setHasOptionsMenu(true);
-        mBackgroundThread = new CalculusExecutor();
 
         mImage = (ImageView) view.findViewById(R.id.imageView);
         mPalleteContainer = (LinearLayout) view.findViewById(R.id.pallete_container);
@@ -82,6 +82,7 @@ public class ColorPalleteFragment extends ProgressFragment {
     }
 
     private void performCalculus() {
+        mBackgroundThread = new CalculusExecutor();
         mBackgroundThread.execute();
     }
 

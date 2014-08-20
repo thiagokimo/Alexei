@@ -52,13 +52,14 @@ public class DominantColorFragment extends ProgressFragment {
     @Override
     public void onPause() {
         super.onPause();
+
         mBackgroundThread.cancel(true);
+        mBackgroundThread = null;
     }
 
     private void configure(View view) {
 
         setHasOptionsMenu(true);
-        mBackgroundThread = new CalculusExecutor();
 
         mImage = (ImageView) view.findViewById(R.id.imageView);
         mDominantColorView = view.findViewById(R.id.dominant_color);
@@ -66,6 +67,7 @@ public class DominantColorFragment extends ProgressFragment {
     }
 
     private void performCalculus() {
+        mBackgroundThread = new CalculusExecutor();
         mBackgroundThread.execute();
     }
 
