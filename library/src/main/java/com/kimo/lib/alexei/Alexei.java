@@ -1,8 +1,10 @@
 package com.kimo.lib.alexei;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
+
+import com.kimo.lib.alexei.calculus.ColorPallete;
+import com.kimo.lib.alexei.calculus.DominantColor;
 
 /**
  * Created by Kimo on 8/14/14.
@@ -14,42 +16,60 @@ public class Alexei {
     static Alexei singleton = null;
     public static Utils UTILS = new Utils();
 
-    final Context mContext;
+    private Bitmap mImage;
 
-    private Alexei(Context context) {
-        mContext = context;
+    private Alexei(Bitmap image) {
+        mImage = image;
     }
 
-    public static Alexei with(Context context) {
+    public static Alexei analize(ImageView image) {
         if(singleton == null)
             synchronized (Alexei.class) {
                 if(singleton == null)
-                    singleton = new Builder(context).build();
+                    singleton = new Builder(image).build();
             }
         return singleton;
     }
 
-    public RequestProcess analize(ImageView image) {
-        return new RequestProcess(this, image, 0);
+    public static Alexei analize(Bitmap image) {
+        if(singleton == null)
+            synchronized (Alexei.class) {
+                if(singleton == null)
+                    singleton = new Builder(image).build();
+            }
+        return singleton;
     }
-    public RequestProcess analize(Bitmap image) {
-        return new RequestProcess(this, image, 0);
+
+    public Calculus perform(int predefinedCalculusFlag) {
+
+        switch (predefinedCalculusFlag) {
+            case ImageProcessingThing.DOMINANT_COLOR:
+                return new DominantColor(mImage);
+            case ImageProcessingThing.COLOR_PALLETE:
+                return new ColorPallete(mImage);
+            default:
+                throw new IllegalArgumentException("Predefined flag is not matching.");
+        }
+
     }
 
     public static class Builder {
-        private final Context context;
+        private final Bitmap image;
 
-        public Builder(Context context) {
+        public Builder(ImageView image) {
+            if(image == null)
+                throw new IllegalArgumentException("Image must not be null");
+            this.image = Utils.getBitmapFromImageView(image);
+        }
 
-            if(context == null)
-                throw new IllegalArgumentException("Context must not be null");
-
-            this.context = context.getApplicationContext();
+        public Builder(Bitmap image) {
+            if(image == null)
+                throw new IllegalArgumentException("Image must not be null");
+            this.image = image;
         }
 
         public Alexei build() {
-
-            return new Alexei(this.context);
+            return new Alexei(this.image);
         }
     }
 }
