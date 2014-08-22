@@ -14,27 +14,15 @@ public class Alexei {
     public static final String TAG = Alexei.class.getSimpleName();
 
     static Alexei singleton = null;
-    public static Utils UTILS = new Utils();
 
     private Bitmap mImage;
-
-    private Alexei(Bitmap image) {
-        mImage = image;
-    }
 
     public static Alexei analize(ImageView image) {
 
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");
 
-        if(singleton == null)
-            synchronized (Alexei.class) {
-                if(singleton == null)
-                    singleton = new Alexei(Utils.getBitmapFromImageView(image));
-            }
-        else
-            singleton.mImage = Utils.getBitmapFromImageView(image);
-
+        getDefault().mImage = AlexeiUtils.getBitmapFromImageView(image);
         return singleton;
     }
 
@@ -43,13 +31,7 @@ public class Alexei {
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");
 
-        if(singleton == null)
-            synchronized (Alexei.class) {
-                if(singleton == null)
-                    singleton = new Alexei(image);
-            }
-        else
-            singleton.mImage = image;
+        getDefault().mImage = image;
         return singleton;
     }
 
@@ -63,5 +45,11 @@ public class Alexei {
             default:
                 throw new IllegalArgumentException("Predefined flag is not matching.");
         }
+    }
+
+    private static synchronized Alexei getDefault() {
+        if(singleton == null)
+            singleton = new Alexei();
+        return singleton;
     }
 }
