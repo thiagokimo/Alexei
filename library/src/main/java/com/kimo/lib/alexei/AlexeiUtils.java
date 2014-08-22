@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by Kimo on 8/15/14.
  */
-public class Utils {
+public class AlexeiUtils {
 
     public static int [][] getPixelsMatrixFromBitmap(Bitmap bitmap) {
 
