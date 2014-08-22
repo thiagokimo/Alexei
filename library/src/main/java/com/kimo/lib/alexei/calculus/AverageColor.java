@@ -4,25 +4,22 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import com.kimo.lib.alexei.Calculus;
-import com.kimo.lib.alexei.Result;
 
 /**
  * Created by Kimo on 8/15/14.
  */
-public class AverageColor extends Calculus {
+public class AverageColor extends Calculus<Integer> {
 
     public static final String TAG = AverageColor.class.getSimpleName();
-
-    private int mAverageColor;
 
     public AverageColor(Bitmap image) {
         super(image);
     }
 
     @Override
-    protected void theCalculation(Bitmap image) {
+    protected Integer theCalculation(Bitmap image) {
 
-        if (null == image) mAverageColor = Color.TRANSPARENT;
+        if (null == image) return Color.TRANSPARENT;
         else {
 
             int pixelCount = image.getWidth() * image.getHeight();
@@ -42,13 +39,7 @@ public class AverageColor extends Calculus {
             green /= pixelCount;
             blue /= pixelCount;
 
-            mAverageColor = Color.rgb(red, green, blue);
+            return Color.rgb(red, green, blue);
         }
-
-    }
-
-    @Override
-    public Result andGiveMeTheResults() {
-        return new Result(mElapsedTime, mAverageColor);
     }
 }

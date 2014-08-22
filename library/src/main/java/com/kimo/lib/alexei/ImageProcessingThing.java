@@ -12,4 +12,5 @@ public class ImageProcessingThing {
 
     // Color pallete of an image
     public static final int COLOR_PALLETE = 1;
+
 }

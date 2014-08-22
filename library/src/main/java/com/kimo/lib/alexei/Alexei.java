@@ -23,20 +23,33 @@ public class Alexei {
     }
 
     public static Alexei analize(ImageView image) {
+
+        if(image == null)
+            throw new IllegalArgumentException("Image must not be null");
+
         if(singleton == null)
             synchronized (Alexei.class) {
                 if(singleton == null)
-                    singleton = new Builder(image).build();
+                    singleton = new Alexei(Utils.getBitmapFromImageView(image));
             }
+        else
+            singleton.mImage = Utils.getBitmapFromImageView(image);
+
         return singleton;
     }
 
     public static Alexei analize(Bitmap image) {
+
+        if(image == null)
+            throw new IllegalArgumentException("Image must not be null");
+
         if(singleton == null)
             synchronized (Alexei.class) {
                 if(singleton == null)
-                    singleton = new Builder(image).build();
+                    singleton = new Alexei(image);
             }
+        else
+            singleton.mImage = image;
         return singleton;
     }
 
@@ -49,27 +62,6 @@ public class Alexei {
                 return new ColorPallete(mImage);
             default:
                 throw new IllegalArgumentException("Predefined flag is not matching.");
-        }
-
-    }
-
-    public static class Builder {
-        private final Bitmap image;
-
-        public Builder(ImageView image) {
-            if(image == null)
-                throw new IllegalArgumentException("Image must not be null");
-            this.image = Utils.getBitmapFromImageView(image);
-        }
-
-        public Builder(Bitmap image) {
-            if(image == null)
-                throw new IllegalArgumentException("Image must not be null");
-            this.image = image;
-        }
-
-        public Alexei build() {
-            return new Alexei(this.image);
         }
     }
 }

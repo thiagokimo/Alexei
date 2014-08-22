@@ -34,8 +34,8 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:id="@+id/imageView"
-            android:src="@drawable/katheryn_winnick"
+            android:id="@+id/img"
+            android:src="@drawable/scarllet"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
@@ -43,7 +43,7 @@
         <LinearLayout
             android:orientation="vertical" android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/img"
             android:gravity="center">
 
             <TextView
@@ -61,7 +61,6 @@
                 />
 
             <LinearLayout
-                android:id="@+id/pallete_container"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

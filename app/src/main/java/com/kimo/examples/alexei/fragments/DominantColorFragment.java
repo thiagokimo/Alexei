@@ -13,13 +13,15 @@ import android.widget.TextView;
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
 import com.kimo.lib.alexei.Alexei;
+import com.kimo.lib.alexei.Answer;
 import com.kimo.lib.alexei.ImageProcessingThing;
-import com.kimo.lib.alexei.Result;
 
 /**
  * Created by Kimo on 8/19/14.
  */
 public class DominantColorFragment extends ProgressFragment {
+
+    public static final String TAG = DominantColorFragment.class.getSimpleName();
 
     private ImageView mImage;
     private View mDominantColorView;
@@ -61,7 +63,7 @@ public class DominantColorFragment extends ProgressFragment {
 
         setHasOptionsMenu(true);
 
-        mImage = (ImageView) view.findViewById(R.id.imageView);
+        mImage = (ImageView) view.findViewById(R.id.img);
         mDominantColorView = view.findViewById(R.id.dominant_color);
         mElapsedTimeView = (TextView) view.findViewById(R.id.elapsed_time);
     }
@@ -86,13 +88,16 @@ public class DominantColorFragment extends ProgressFragment {
         protected Void doInBackground(Void... params) {
 
             if(!isCancelled()) {
-                Result dominantColorResult = Alexei.with(getActivity())
-                        .analize(mImage)
-                        .calculate(ImageProcessingThing.DOMINANT_COLOR)
-                        .andGiveMeTheResults();
 
-                mDominantColorView.setBackgroundColor((Integer) dominantColorResult.getResult());
-                mElapsedTimeView.setText(new StringBuilder().append(dominantColorResult.getElapsedTime()).append(" milliseconds"));
+                Alexei.analize(mImage)
+                        .perform(ImageProcessingThing.DOMINANT_COLOR)
+                        .andGiveMe(new Answer<Integer>() {
+                            @Override
+                            public void ifSucceeded(Integer answer, long elapsedTime) {
+                                mDominantColorView.setBackgroundColor(answer);
+                                mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
+                            }
+                        });
             }
 
 

@@ -5,17 +5,17 @@ import android.graphics.Bitmap;
 /**
  * Created by Kimo on 8/18/14.
  */
-public abstract class Calculus implements Runnable {
+public abstract class Calculus<T> implements Runnable {
 
     protected Bitmap mImage;
     protected long mElapsedTime = 0;
+    protected T mResult;
 
     protected Calculus(Bitmap image) {
         mImage = image;
-        run();
     }
 
-    protected abstract void theCalculation(Bitmap image);
+    protected abstract T theCalculation(Bitmap image);
 
     @Override
     public void run() {
@@ -23,8 +23,7 @@ public abstract class Calculus implements Runnable {
         long startTime, endTime;
 
         startTime = System.currentTimeMillis();
-
-        theCalculation(mImage);
+        mResult = theCalculation(mImage);
         endTime = System.currentTimeMillis();
 
         mElapsedTime = endTime - startTime;
@@ -34,9 +33,8 @@ public abstract class Calculus implements Runnable {
      * Returns
      * @return Object - Object with the result
      */
-    public abstract Result andGiveMeTheResults();
-
-    public long getElapsedTime() {
-        return mElapsedTime;
+    public void andGiveMe(Answer<T> answerCallback) {
+        run();
+        answerCallback.ifSucceeded(mResult, mElapsedTime);
     }
 }

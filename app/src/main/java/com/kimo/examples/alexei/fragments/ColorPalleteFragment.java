@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
 import com.kimo.lib.alexei.Alexei;
+import com.kimo.lib.alexei.Answer;
 import com.kimo.lib.alexei.ImageProcessingThing;
-import com.kimo.lib.alexei.Result;
 
 import java.util.List;
 
@@ -23,6 +23,8 @@ import java.util.List;
  * Created by Kimo on 8/19/14.
  */
 public class ColorPalleteFragment extends ProgressFragment {
+
+    public static final String TAG = ColorPalleteFragment.class.getSimpleName();
 
     private ImageView mImage;
     private TextView mElapsedTimeView;
@@ -63,7 +65,7 @@ public class ColorPalleteFragment extends ProgressFragment {
 
         setHasOptionsMenu(true);
 
-        mImage = (ImageView) view.findViewById(R.id.imageView);
+        mImage = (ImageView) view.findViewById(R.id.img);
         mPalleteContainer = (LinearLayout) view.findViewById(R.id.pallete_container);
         mElapsedTimeView = (TextView) view.findViewById(R.id.elapsed_time);
     }
@@ -99,15 +101,15 @@ public class ColorPalleteFragment extends ProgressFragment {
         protected Void doInBackground(Void... params) {
 
             if(!isCancelled()) {
-                Result colorPalleteResult = Alexei.with(getActivity())
-                        .analize(mImage)
-                        .calculate(ImageProcessingThing.COLOR_PALLETE)
-                        .andGiveMeTheResults();
-
-                List<Integer> mPallete = (List<Integer>) colorPalleteResult.getResult();
-                fillPalleteColors(mPallete);
-
-                mElapsedTimeView.setText(new StringBuilder().append(colorPalleteResult.getElapsedTime()).append(" milliseconds"));
+                Alexei.analize(mImage)
+                        .perform(ImageProcessingThing.COLOR_PALLETE)
+                        .andGiveMe(new Answer<List<Integer>>() {
+                            @Override
+                            public void ifSucceeded(List<Integer> answer, long elapsedTime) {
+                                fillPalleteColors(answer);
+                                mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
+                            }
+                        });
             }
 
             return null;

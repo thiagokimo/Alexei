@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import com.kimo.lib.alexei.Calculus;
-import com.kimo.lib.alexei.Result;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,9 +15,7 @@ import java.util.Map;
 /**
  * Created by Kimo on 8/19/14.
  */
-public class DominantColor extends Calculus {
-
-    private int mColor;
+public class DominantColor extends Calculus<Integer> {
 
     public DominantColor(Bitmap image) {
         super(image);
@@ -29,7 +26,7 @@ public class DominantColor extends Calculus {
      * @param image
      */
     @Override
-    protected void theCalculation(Bitmap image) {
+    protected Integer theCalculation(Bitmap image) {
         Map histogram = new HashMap();
 
         for(int i = 0; i < image.getWidth(); i++)
@@ -50,12 +47,7 @@ public class DominantColor extends Calculus {
                 }
             }
 
-        mColor = Color.parseColor("#"+getMostCommonColor(histogram));
-    }
-
-    @Override
-    public Result andGiveMeTheResults() {
-        return new Result(mElapsedTime, mColor);
+        return Color.parseColor("#"+getMostCommonColor(histogram));
     }
 
     private int[] getRGBArrayFromPixel(int pixel) {
