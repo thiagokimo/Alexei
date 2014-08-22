@@ -10,6 +10,11 @@ import android.provider.MediaStore;
 import android.widget.ImageView;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+import static java.lang.Thread.MIN_PRIORITY;
 
 /**
  * Created by Kimo on 8/15/14.
@@ -57,5 +62,20 @@ public class AlexeiUtils {
                 cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    public static ExecutorService getDefaultCalculator() {
+        return Executors.newFixedThreadPool(1 , new ThreadFactory() {
+            @Override
+            public Thread newThread(final Runnable r) {
+                return new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Thread.currentThread().setPriority(MIN_PRIORITY);
+                        r.run();
+                    }
+                }, "IdleThread");
+            }
+        });
     }
 }

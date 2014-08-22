@@ -5,5 +5,8 @@ package com.kimo.lib.alexei;
  */
 public interface Answer<T> {
 
-    void ifSucceeded(T answer, long elapsedTime);
+    void beforeExecution();
+    void afterExecution(T answer, long elapsedTime);
+
+    void ifFails(Exception error);
 }

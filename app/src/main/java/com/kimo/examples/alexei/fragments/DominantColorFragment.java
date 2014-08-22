@@ -1,6 +1,5 @@
 package com.kimo.examples.alexei.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +25,6 @@ public class DominantColorFragment extends ProgressFragment {
     private ImageView mImage;
     private View mDominantColorView;
     private TextView mElapsedTimeView;
-    private CalculusExecutor mBackgroundThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,25 +36,17 @@ public class DominantColorFragment extends ProgressFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         performCalculus();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        mBackgroundThread.cancel(true);
-        mBackgroundThread = null;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main, menu);
     }
 
     private void configure(View view) {
@@ -69,48 +59,26 @@ public class DominantColorFragment extends ProgressFragment {
     }
 
     private void performCalculus() {
-        mBackgroundThread = new CalculusExecutor();
-        mBackgroundThread.execute();
-    }
 
-    private class CalculusExecutor extends AsyncTask<Void, Void, Void> {
+        Alexei.analize(mImage)
+                .perform(ImageProcessingThing.DOMINANT_COLOR)
+                .andGiveMe(new Answer<Integer>() {
+                    @Override
+                    public void beforeExecution() {
+                        setContentShown(false);
+                    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+                    @Override
+                    public void afterExecution(Integer answer, long elapsedTime) {
+                        mDominantColorView.setBackgroundColor(answer);
+                        mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
+                        setContentShown(true);
+                    }
 
-            if(!isCancelled())
-                setContentShown(false);
+                    @Override
+                    public void ifFails(Exception error) {
 
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            if(!isCancelled()) {
-
-                Alexei.analize(mImage)
-                        .perform(ImageProcessingThing.DOMINANT_COLOR)
-                        .andGiveMe(new Answer<Integer>() {
-                            @Override
-                            public void ifSucceeded(Integer answer, long elapsedTime) {
-                                mDominantColorView.setBackgroundColor(answer);
-                                mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
-                            }
-                        });
-            }
-
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if(!isCancelled())
-                setContentShown(true);
-        }
+                    }
+                });
     }
 }

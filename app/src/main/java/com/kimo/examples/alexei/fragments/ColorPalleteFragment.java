@@ -1,6 +1,5 @@
 package com.kimo.examples.alexei.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +28,6 @@ public class ColorPalleteFragment extends ProgressFragment {
     private ImageView mImage;
     private TextView mElapsedTimeView;
     private LinearLayout mPalleteContainer;
-    private CalculusExecutor mBackgroundThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,18 +45,10 @@ public class ColorPalleteFragment extends ProgressFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         performCalculus();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        mBackgroundThread.cancel(true);
-        mBackgroundThread = null;
     }
 
     private void configure(View view) {
@@ -84,42 +74,27 @@ public class ColorPalleteFragment extends ProgressFragment {
     }
 
     private void performCalculus() {
-        mBackgroundThread = new CalculusExecutor();
-        mBackgroundThread.execute();
-    }
+        Alexei.analize(mImage)
+                .perform(ImageProcessingThing.COLOR_PALLETE)
+                .andGiveMe(new Answer<List<Integer>>() {
+                    @Override
+                    public void beforeExecution() {
+                        setContentShown(false);
+                    }
 
-    private class CalculusExecutor extends AsyncTask<Void, Void, Void> {
+                    @Override
+                    public void afterExecution(List<Integer> answer, long elapsedTime) {
+                        fillPalleteColors(answer);
+                        mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
+                        setContentShown(true);
+                    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            if(!isCancelled())
-                setContentShown(false);
-        }
+                    @Override
+                    public void ifFails(Exception error) {
 
-        @Override
-        protected Void doInBackground(Void... params) {
+                    }
+                });
 
-            if(!isCancelled()) {
-                Alexei.analize(mImage)
-                        .perform(ImageProcessingThing.COLOR_PALLETE)
-                        .andGiveMe(new Answer<List<Integer>>() {
-                            @Override
-                            public void ifSucceeded(List<Integer> answer, long elapsedTime) {
-                                fillPalleteColors(answer);
-                                mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
-                            }
-                        });
-            }
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if(!isCancelled())
-                setContentShown(true);
-        }
     }
 }
