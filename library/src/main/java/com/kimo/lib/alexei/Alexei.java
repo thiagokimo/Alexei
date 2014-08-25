@@ -59,6 +59,10 @@ public class Alexei {
     }
 
     public void andGiveMe(Answer answerCallback) {
+
+        if(mCalculus == null)
+            throw new IllegalArgumentException("You must inform which calculus Alexei needs to perform");
+
         answerCallback.beforeExecution();
 
         ExecutorService calculator = AlexeiUtils.getDefaultCalculator();
