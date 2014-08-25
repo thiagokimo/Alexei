@@ -6,6 +6,9 @@ import android.widget.ImageView;
 import com.kimo.lib.alexei.calculus.ColorPallete;
 import com.kimo.lib.alexei.calculus.DominantColor;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Kimo on 8/14/14.
  */
@@ -16,6 +19,7 @@ public class Alexei {
     static Alexei singleton = null;
 
     private Bitmap mImage;
+    private Calculus mCalculus;
 
     public static Alexei analize(ImageView image) {
 
@@ -35,15 +39,37 @@ public class Alexei {
         return singleton;
     }
 
-    public Calculus perform(int predefinedCalculusFlag) {
+    public Alexei perform(int predefinedCalculusFlag) {
 
         switch (predefinedCalculusFlag) {
             case ImageProcessingThing.DOMINANT_COLOR:
-                return new DominantColor(mImage);
+                mCalculus = new DominantColor(mImage);
+                return this;
             case ImageProcessingThing.COLOR_PALLETE:
-                return new ColorPallete(mImage);
+                mCalculus = new ColorPallete(mImage);
+                return this;
             default:
                 throw new IllegalArgumentException("Predefined flag is not matching.");
+        }
+    }
+
+    public Alexei perform(Calculus customCalculus) {
+        mCalculus = customCalculus;
+        return this;
+    }
+
+    public void andGiveMe(Answer answerCallback) {
+        answerCallback.beforeExecution();
+
+        ExecutorService calculator = AlexeiUtils.getDefaultCalculator();
+
+        calculator.execute(mCalculus);
+        calculator.shutdown();
+        try {
+            calculator.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            answerCallback.afterExecution(mCalculus.mResult, mCalculus.mElapsedTime);
+        } catch (InterruptedException e) {
+            answerCallback.ifFails(e);
         }
     }
 
