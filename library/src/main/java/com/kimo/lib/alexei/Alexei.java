@@ -3,7 +3,7 @@ package com.kimo.lib.alexei;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import com.kimo.lib.alexei.calculus.ColorPallete;
+import com.kimo.lib.alexei.calculus.ColorPalette;
 import com.kimo.lib.alexei.calculus.DominantColor;
 
 import java.util.concurrent.ExecutorService;
@@ -45,8 +45,8 @@ public class Alexei {
             case ImageProcessingThing.DOMINANT_COLOR:
                 mCalculus = new DominantColor(mImage);
                 return this;
-            case ImageProcessingThing.COLOR_PALLETE:
-                mCalculus = new ColorPallete(mImage);
+            case ImageProcessingThing.COLOR_PALETTE:
+                mCalculus = new ColorPalette(mImage);
                 return this;
             default:
                 throw new IllegalArgumentException("Predefined flag is not matching.");

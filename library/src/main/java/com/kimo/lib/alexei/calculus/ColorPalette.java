@@ -12,13 +12,13 @@ import java.util.List;
 /**
  * Created by Kimo on 8/18/14.
  */
-public class ColorPallete extends Calculus<List<Integer>> {
+public class ColorPalette extends Calculus<List<Integer>> {
 
     public static final int NUMBER_OF_COLORS = 10;
 
     private List<Integer> mColorPallete;
 
-    public ColorPallete(Bitmap image) {
+    public ColorPalette(Bitmap image) {
         super(image);
     }
 
@@ -27,10 +27,10 @@ public class ColorPallete extends Calculus<List<Integer>> {
         mColorPallete = new ArrayList<Integer>();
 
         int [][] pixelsMatrix = AlexeiUtils.getPixelsMatrixFromBitmap(image);
-        int [] calculatedPallete = Quantize.quantizeImage(pixelsMatrix, NUMBER_OF_COLORS);
+        int [] calculatedPalette = Quantize.quantizeImage(pixelsMatrix, NUMBER_OF_COLORS);
 
-        for(int x = 0; x < calculatedPallete.length; x++)
-            mColorPallete.add(new Integer(calculatedPallete[x]));
+        for(int x = 0; x < calculatedPalette.length; x++)
+            mColorPallete.add(new Integer(calculatedPalette[x]));
 
         return mColorPallete;
     }

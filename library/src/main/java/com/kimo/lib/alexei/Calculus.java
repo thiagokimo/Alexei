@@ -15,6 +15,8 @@ public abstract class Calculus<T> implements Runnable {
         mImage = image;
     }
 
+    public Calculus() {}
+
     protected abstract T theCalculation(Bitmap image);
 
     @Override

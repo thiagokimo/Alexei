@@ -10,7 +10,7 @@ public class ImageProcessingThing {
     // Dominant color of an image
     public static final int DOMINANT_COLOR = 0;
 
-    // Color pallete of an image
-    public static final int COLOR_PALLETE = 1;
+    // Color palette of an image
+    public static final int COLOR_PALETTE = 1;
 
 }
