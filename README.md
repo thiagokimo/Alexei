@@ -7,7 +7,7 @@ Alexei is a type-safe interface of image processing algorithms.
 
 # Demo
 
-Download the apk that is currently in the **app** folder.
+I'll soon post the Google Play demo here.
 
 ## Setup
 I'll soon post the aar link here.
@@ -102,8 +102,10 @@ To add a new predefined calculus:
 3. Create your calculus inside `calculus` package.
 4. Add a flag to the new calculus in [ImageProcessingThing]()
 5. Create a fragment in the demo app with the new calculations being applied in an image.
-### THE IMAGES OF THE DEMO APP MUST BE HOT BLOND GIRLS.
 6. Do your pull-request.
+
+### THE IMAGES OF THE DEMO APP MUST BE HOT BLOND GIRLS.
+
 
 ## TODO
 * Figure-out a way to let Alexei perform synchronous AND/OR asynchronous calculus.
