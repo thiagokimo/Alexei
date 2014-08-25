@@ -115,7 +115,7 @@ To add a new predefined calculus:
 * Thing
 
 
-## Who the fu#!% is Alexei?
+## Who the fu#% is Alexei?
 [Alexei](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4784376J9)
 was one of my favorite professors in college. He's well known for its studies in
  **Image Processing** and **Computer Vision** fields.
