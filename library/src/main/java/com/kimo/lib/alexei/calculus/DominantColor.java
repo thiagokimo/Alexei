@@ -21,10 +21,8 @@ public class DominantColor extends Calculus<Integer> {
         super(image);
     }
 
-    /**
-     * Calculated according to this solution {@link http://stackoverflow.com/questions/8471236/finding-the-dominant-color-of-an-image-in-an-android-drawable }
-     * @param image
-     */
+    // Solution found in the url below
+    //http://stackoverflow.com/questions/8471236/finding-the-dominant-color-of-an-image-in-an-android-drawable
     @Override
     protected Integer theCalculation(Bitmap image) {
         Map histogram = new HashMap();
