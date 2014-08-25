@@ -1,5 +1,6 @@
 package com.kimo.examples.alexei.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +29,7 @@ public class ColorPalleteFragment extends ProgressFragment {
     private ImageView mImage;
     private TextView mElapsedTimeView;
     private LinearLayout mPalleteContainer;
+    private AsyncTask mThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +37,14 @@ public class ColorPalleteFragment extends ProgressFragment {
         configure(view);
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mThread.cancel(true);
+        mThread = null;
     }
 
     @Override
@@ -74,27 +84,37 @@ public class ColorPalleteFragment extends ProgressFragment {
     }
 
     private void performCalculus() {
-        Alexei.analize(mImage)
-                .perform(ImageProcessingThing.COLOR_PALLETE)
-                .andGiveMe(new Answer<List<Integer>>() {
-                    @Override
-                    public void beforeExecution() {
-                        setContentShown(false);
-                    }
+        mThread = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
 
-                    @Override
-                    public void afterExecution(List<Integer> answer, long elapsedTime) {
-                        fillPalleteColors(answer);
-                        mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
-                        setContentShown(true);
-                    }
+                Alexei.analize(mImage)
+                        .perform(ImageProcessingThing.COLOR_PALLETE)
+                        .andGiveMe(new Answer<List<Integer>>() {
+                            @Override
+                            public void beforeExecution() {}
 
-                    @Override
-                    public void ifFails(Exception error) {
+                            @Override
+                            public void afterExecution(List<Integer> answer, long elapsedTime) {
+                                fillPalleteColors(answer);
+                                mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
+                            }
 
-                    }
-                });
+                            @Override
+                            public void ifFails(Exception error) {}
+                        });
 
+                return null;
+            }
 
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+
+                setContentShown(true);
+            }
+        };
+
+        mThread.execute();
     }
 }

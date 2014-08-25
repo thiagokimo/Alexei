@@ -1,5 +1,6 @@
 package com.kimo.examples.alexei.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +26,7 @@ public class DominantColorFragment extends ProgressFragment {
     private ImageView mImage;
     private View mDominantColorView;
     private TextView mElapsedTimeView;
+    private AsyncTask mThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +35,14 @@ public class DominantColorFragment extends ProgressFragment {
         configure(view);
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mThread.cancel(true);
+        mThread = null;
     }
 
     @Override
@@ -60,25 +70,43 @@ public class DominantColorFragment extends ProgressFragment {
 
     private void performCalculus() {
 
-        Alexei.analize(mImage)
-                .perform(ImageProcessingThing.DOMINANT_COLOR)
-                .andGiveMe(new Answer<Integer>() {
-                    @Override
-                    public void beforeExecution() {
-                        setContentShown(false);
-                    }
+        mThread = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
 
-                    @Override
-                    public void afterExecution(Integer answer, long elapsedTime) {
-                        mDominantColorView.setBackgroundColor(answer);
-                        mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
-                        setContentShown(true);
-                    }
+                Alexei.analize(mImage)
+                        .perform(ImageProcessingThing.DOMINANT_COLOR)
+                        .andGiveMe(new Answer<Integer>() {
+                            @Override
+                            public void beforeExecution() {}
 
-                    @Override
-                    public void ifFails(Exception error) {
+                            @Override
+                            public void afterExecution(Integer answer, long elapsedTime) {
+                                mDominantColorView.setBackgroundColor(answer);
+                                mElapsedTimeView.setText(new StringBuilder().append(elapsedTime).append(" milliseconds"));
 
-                    }
-                });
+                            }
+
+                            @Override
+                            public void ifFails(Exception error) {
+
+                            }
+                        });
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+
+                setContentShown(true);
+            }
+        };
+
+        mThread.execute();
     }
+
+
+
 }
