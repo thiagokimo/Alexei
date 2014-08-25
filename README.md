@@ -8,6 +8,8 @@ A type-safe interface of image processing algorithms.
 
 # Demo
 
+The sample application (the source is in the **app** folder) has been published on Google Play to facilitate the access:
+
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=com.kimo.examples.alexei)
 
 ## Setup
