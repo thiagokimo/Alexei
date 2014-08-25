@@ -1,9 +1,10 @@
 # Alexei
 
-## Overview
-Alexei is a type-safe interface of image processing algorithms.
+A type-safe interface of image processing algorithms.
 
 ## Screenshots
+![](https://github.com/thiagokimo/Alexei/blob/master/screenshots/dominant-color.png)
+![](https://github.com/thiagokimo/Alexei/blob/master/screenshots/palette.png)
 
 # Demo
 
