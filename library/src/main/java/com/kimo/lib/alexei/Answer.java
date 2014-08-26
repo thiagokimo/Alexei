@@ -1,7 +1,7 @@
 package com.kimo.lib.alexei;
 
 /**
- * Created by Kimo on 8/21/14.
+ * Callback interface that Calculus injects the calculated results.
  */
 public interface Answer<T> {
 

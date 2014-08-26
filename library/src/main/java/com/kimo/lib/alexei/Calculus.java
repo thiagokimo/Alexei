@@ -3,7 +3,7 @@ package com.kimo.lib.alexei;
 import android.graphics.Bitmap;
 
 /**
- * Created by Kimo on 8/18/14.
+ * Abstract class that represents Calculus that Alexei will handle
  */
 public abstract class Calculus<T> {
 
@@ -16,6 +16,12 @@ public abstract class Calculus<T> {
 
     public Calculus() {}
 
+    /**
+     * Method that will contain the calculation algorithm
+     * @param image object of interest
+     * @return the calculus results
+     * @throws Exception in case of errors
+     */
     protected abstract T theCalculation(Bitmap image) throws Exception;
 
     /**

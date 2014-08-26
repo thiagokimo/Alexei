@@ -19,6 +19,13 @@ public class Alexei {
         mContext = context;
     }
 
+    /**
+     *
+     * Method that access Alexei.
+     *
+     * @param context that Alexei will perform its operations
+     * @return the singleton instance of Alexei
+     */
     public static Alexei with(Context context) {
         if (singleton == null) {
             synchronized (Alexei.class) {
@@ -30,6 +37,12 @@ public class Alexei {
         return singleton;
     }
 
+    /**
+     * Creates a {@link com.kimo.lib.alexei.CalculusBuilder} object that will perform the operations
+     * using a given ImageView
+     * @param image
+     * @return a calculus builder object
+     */
     public CalculusBuilder analize(ImageView image) {
 
         if(image == null)

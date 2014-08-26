@@ -6,7 +6,7 @@ import com.kimo.lib.alexei.calculus.ColorPalette;
 import com.kimo.lib.alexei.calculus.DominantColor;
 
 /**
- * Build {@link com.kimo.lib.alexei.Calculus} objects that would be dispatched over Alexei's poll thread.
+ * Build {@link com.kimo.lib.alexei.Calculus} objects that would be dispatched over Alexei's pool thread.
  */
 public class CalculusBuilder<T> {
 

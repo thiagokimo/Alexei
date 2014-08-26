@@ -1,7 +1,7 @@
 package com.kimo.lib.alexei;
 
 /**
- * Created by Kimo on 8/14/14.
+ * A map of predefined calculus that are used by {@link com.kimo.lib.alexei.CalculusBuilder}
  */
 public class ImageProcessingThing {
 

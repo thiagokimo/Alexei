@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Kimo on 8/19/14.
+ * Calculates the most common color of an image.
  */
 public class DominantColor extends Calculus<Integer> {
 
