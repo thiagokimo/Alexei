@@ -6,7 +6,7 @@ import android.graphics.Color;
 import com.kimo.lib.alexei.Calculus;
 
 /**
- * Created by Kimo on 8/15/14.
+ * Calculates the average RGB color of an image
  */
 public class AverageColor extends Calculus<Integer> {
 
