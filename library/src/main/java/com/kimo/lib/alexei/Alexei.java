@@ -1,85 +1,52 @@
 package com.kimo.lib.alexei;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import com.kimo.lib.alexei.calculus.ColorPalette;
-import com.kimo.lib.alexei.calculus.DominantColor;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
-
 /**
- * Created by Kimo on 8/14/14.
+ * Main class that configures operations over images. You need to pass an {@link android.widget.ImageView} or a {@link android.graphics.Bitmap}
+ * and the {@link com.kimo.lib.alexei.Calculus} that you be applied over the given image. Due to this, retrieving the result requires a callback as an
+ * {@link com.kimo.lib.alexei.Answer}
  */
 public class Alexei {
 
-    public static final String TAG = Alexei.class.getSimpleName();
-
-    static Alexei singleton = null;
-
+    private static Alexei singleton = null;
+    private Context mContext;
     private Bitmap mImage;
-    private Calculus mCalculus;
 
-    public static Alexei analize(ImageView image) {
+    private Alexei(Context context) {
+        mContext = context;
+    }
+
+    public static Alexei with(Context context) {
+        if (singleton == null) {
+            synchronized (Alexei.class) {
+                if (singleton == null)
+                    singleton = new Alexei(context);
+            }
+        }
+
+        return singleton;
+    }
+
+    public CalculusBuilder analize(ImageView image) {
 
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");
 
-        getDefault().mImage = AlexeiUtils.getBitmapFromImageView(image);
-        return singleton;
+        mImage = AlexeiUtils.getBitmapFromImageView(image);
+
+        return new CalculusBuilder(mImage);
     }
 
-    public static Alexei analize(Bitmap image) {
+    public CalculusBuilder analize(Bitmap image) {
 
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");
 
-        getDefault().mImage = image;
-        return singleton;
-    }
+        mImage = image;
 
-    public Alexei perform(int predefinedCalculusFlag) {
-
-        switch (predefinedCalculusFlag) {
-            case ImageProcessingThing.DOMINANT_COLOR:
-                mCalculus = new DominantColor(mImage);
-                return this;
-            case ImageProcessingThing.COLOR_PALETTE:
-                mCalculus = new ColorPalette(mImage);
-                return this;
-            default:
-                throw new IllegalArgumentException("Predefined flag is not matching.");
-        }
-    }
-
-    public Alexei perform(Calculus customCalculus) {
-        mCalculus = customCalculus;
-        return this;
-    }
-
-    public void andGiveMe(Answer answerCallback) {
-
-        if(mCalculus == null)
-            throw new IllegalArgumentException("You must inform which calculus Alexei needs to perform");
-
-        answerCallback.beforeExecution();
-
-        ExecutorService calculator = AlexeiUtils.getDefaultCalculator();
-
-        calculator.execute(mCalculus);
-        calculator.shutdown();
-        try {
-            calculator.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-            answerCallback.afterExecution(mCalculus.mResult, mCalculus.mElapsedTime);
-        } catch (InterruptedException e) {
-            answerCallback.ifFails(e);
-        }
-    }
-
-    private static synchronized Alexei getDefault() {
-        if(singleton == null)
-            singleton = new Alexei();
-        return singleton;
+        return new CalculusBuilder(mImage);
     }
 }
