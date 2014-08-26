@@ -13,7 +13,24 @@ The sample application (the source is in the **app** folder) has been published 
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=com.kimo.examples.alexei)
 
 ## Setup
-I'll soon post the aar link here.
+
+Gradle:
+
+``` groovy
+dependencies {
+    compile 'com.github.thiagokimo:alexei-library:1.0@aar'
+}
+```
+
+Maven:
+
+``` xml
+<dependency>
+    <groupId>com.github.thiagokimo</groupId>
+    <artifactId>alexei-library</artifactId>
+    <version>1.0</version>
+</dependency>
+```
 
 ## Usage
 
@@ -113,8 +130,7 @@ To add a new predefined calculus:
 ## TODO
 * Figure-out a way to let Alexei perform synchronous AND/OR asynchronous calculus.
 * Make it thread-safe. This way I won't need to wrap Alexei inside AsyncTasks or Handlers.
-* Feed Alexei with more calculus.
-* Thing
+* Feed Alexei with more predefined calculus.
 
 
 ## Who the fu#% is Alexei?
