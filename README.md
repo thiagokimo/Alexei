@@ -37,7 +37,8 @@ Maven:
 The basic API declaration is quite simple:
 
 ``` java
-Alexei.analize(image)
+Alexei.with(context)
+      .analize(image)
       .perform(calculus)
       .andGiveMe(answer);
 ```
@@ -48,7 +49,8 @@ and give me the answer!"*
 ### Example
 
 ``` java
-Alexei.analize(imageView)
+Alexei.with(context)
+      .analize(imageView)
       .perform(ImageProcessingThing.DOMINANT_COLOR)
       .andGiveMe(new Answer<Color>(){
         @Override
@@ -83,7 +85,8 @@ the object you expect to calculate. The Answer generic type must match your cust
 
 ``` java
 
-Alexei.analize(image)
+Alexei.with(context)
+        .analize(image)
         .perform(new Calculus<YourObject>() {
             @Override
             protected YourObject theCalculation(Bitmap image) {
@@ -129,7 +132,6 @@ To add a new predefined calculus:
 
 ## TODO
 * Figure-out a way to let Alexei perform synchronous AND/OR asynchronous calculus.
-* Make it thread-safe. This way I won't need to wrap Alexei inside AsyncTasks or Handlers.
 * Feed Alexei with more predefined calculus.
 
 
