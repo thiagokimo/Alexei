@@ -267,8 +267,12 @@ public class Quantize {
 
 
     /**
+     * /**
      * Reduce the image to the given number of colors. The pixels are
      * reduced in place.
+     * @param pixels pixels array
+     * @param max_colors max colors of the palette
+     * @return the palette
      */
     public static int[] quantizeImage(int pixels[][], int max_colors) {
         Cube cube = new Cube(pixels, max_colors);

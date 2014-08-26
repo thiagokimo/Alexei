@@ -40,7 +40,7 @@ public class Alexei {
     /**
      * Creates a {@link com.kimo.lib.alexei.CalculusBuilder} object that will perform the operations
      * using a given ImageView
-     * @param image
+     * @param image that will be passed over to {@link com.kimo.lib.alexei.CalculusBuilder}
      * @return a calculus builder object
      */
     public CalculusBuilder analize(ImageView image) {

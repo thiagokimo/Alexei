@@ -48,7 +48,6 @@ public class CalculusBuilder<T> {
      * Executes the calculation. Must be called after a {@link com.kimo.lib.alexei.Calculus} is set.
      *
      * @param callback to use when the calculation finish. The callback will be called in UI thread.
-     * @return a
      */
     public void showMe(Answer<T> callback) {
         CalculusTask<T> task = new CalculusTask(image,calculus,callback);
