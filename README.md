@@ -18,7 +18,7 @@ Gradle:
 
 ``` groovy
 dependencies {
-    compile 'com.github.thiagokimo:alexei-library:1.+@aar'
+    compile 'com.github.thiagokimo:alexei-library:1.+'
 }
 ```
 
