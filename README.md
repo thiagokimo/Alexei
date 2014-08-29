@@ -40,7 +40,7 @@ The basic API declaration is quite simple:
 Alexei.with(context)
       .analize(image)
       .perform(calculus)
-      .andGiveMe(answer);
+      .showMe(answer);
 ```
 
 It's like saying: *"Alexei, analize this image, perform some calculus
@@ -52,7 +52,7 @@ and give me the answer!"*
 Alexei.with(context)
       .analize(imageView)
       .perform(ImageProcessingThing.DOMINANT_COLOR)
-      .andGiveMe(new Answer<Color>(){
+      .showMe(new Answer<Color>(){
         @Override
         public void beforeExecution() {
           // anything you want to define before the calculation
