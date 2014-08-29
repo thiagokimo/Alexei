@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
@@ -26,8 +25,6 @@ public class DominantColorFragment extends ProgressFragment {
     public static final String TAG = DominantColorFragment.class.getSimpleName();
 
     private ImageView mImage;
-    private View mDominantColorView;
-    private TextView mElapsedTimeView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,9 +70,6 @@ public class DominantColorFragment extends ProgressFragment {
     }
 
     private void configure(View view) {
-
-        setHasOptionsMenu(true);
-
         mImage = (ImageView) view.findViewById(R.id.img);
     }
 

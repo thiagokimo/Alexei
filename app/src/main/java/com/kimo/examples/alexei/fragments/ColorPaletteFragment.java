@@ -12,11 +12,15 @@ import android.widget.TextView;
 
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
+import com.kimo.examples.alexei.events.CalculateColorPaletteClicked;
 import com.kimo.lib.alexei.Alexei;
+import com.kimo.lib.alexei.AlexeiUtils;
 import com.kimo.lib.alexei.Answer;
-import com.kimo.lib.alexei.ImageProcessingThing;
+import com.kimo.lib.alexei.calculus.ColorPalette;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Kimo on 8/19/14.
@@ -31,7 +35,7 @@ public class ColorPaletteFragment extends ProgressFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pallete, container, false);
+        View view = inflater.inflate(R.layout.fragment_palette, container, false);
         configure(view);
 
         return view;
@@ -48,36 +52,38 @@ public class ColorPaletteFragment extends ProgressFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        performCalculus();
+        setContentShown(true);
+
+        getFragmentManager().beginTransaction().replace(R.id.info_area, new ColorPaletteParamsFragment()).commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(CalculateColorPaletteClicked event) {
+        performCalculus(event.getNumberOfColors());
     }
 
     private void configure(View view) {
-
-        setHasOptionsMenu(true);
-
         mImage = (ImageView) view.findViewById(R.id.img);
-        mPaletteContainer = (LinearLayout) view.findViewById(R.id.palette_container);
-        mElapsedTimeView = (TextView) view.findViewById(R.id.elapsed_time);
     }
 
-    private void fillPalleteColors(List<Integer> colors) {
-
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        for(int color : colors) {
-
-            View palleteColor = inflater.inflate(R.layout.item_pallete, mPaletteContainer, false);
-            palleteColor.setBackgroundColor(color);
-
-            mPaletteContainer.addView(palleteColor);
-        }
-    }
-
-    private void performCalculus() {
+    private void performCalculus(int numberOfColors) {
 
         Alexei.with(getActivity())
                 .analize(mImage)
-                .perform(ImageProcessingThing.COLOR_PALETTE)
+                .perform(new ColorPalette(AlexeiUtils.getBitmapFromImageView(mImage),numberOfColors))
                 .showMe(new Answer<List<Integer>>() {
                     @Override
                     public void beforeExecution() {
@@ -86,8 +92,8 @@ public class ColorPaletteFragment extends ProgressFragment {
 
                     @Override
                     public void afterExecution(List<Integer> answer, long elapsedTime) {
-                        fillPalleteColors(answer);
-                        mElapsedTimeView.setText(new StringBuilder().append(elapsedTime));
+
+                        getFragmentManager().beginTransaction().replace(R.id.info_area, ColorPaletteResultsFragment.newInstance((java.util.ArrayList<Integer>) answer, elapsedTime)).commit();
                         setContentShown(true);
                     }
 
@@ -96,6 +102,5 @@ public class ColorPaletteFragment extends ProgressFragment {
 
                     }
                 });
-
     }
 }

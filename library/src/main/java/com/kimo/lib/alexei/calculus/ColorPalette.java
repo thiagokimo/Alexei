@@ -15,10 +15,8 @@ import java.util.List;
  */
 public class ColorPalette extends Calculus<List<Integer>> {
 
-    public static final int NUMBER_OF_COLORS = 10;
-
     private List<Integer> mColorPallete;
-    private int mNumberOfColors = NUMBER_OF_COLORS;
+    private int mNumberOfColors;
 
     public ColorPalette(Bitmap image, int numberOfColors) {
         super(image);
@@ -34,7 +32,7 @@ public class ColorPalette extends Calculus<List<Integer>> {
         mColorPallete = new ArrayList<Integer>();
 
         int [][] pixelsMatrix = AlexeiUtils.getPixelsMatrixFromBitmap(image);
-        int [] calculatedPalette = Quantize.quantizeImage(pixelsMatrix, NUMBER_OF_COLORS);
+        int [] calculatedPalette = Quantize.quantizeImage(pixelsMatrix, mNumberOfColors);
 
         for(int x = 0; x < calculatedPalette.length; x++)
             mColorPallete.add(new Integer(calculatedPalette[x]));

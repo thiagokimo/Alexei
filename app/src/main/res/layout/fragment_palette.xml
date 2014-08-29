@@ -38,36 +38,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Palette:"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"/>
-
-        <LinearLayout
-            android:id="@+id/palette_container"
-            android:gravity="center"
-            android:orientation="horizontal"
+        <FrameLayout
+            android:id="@+id/info_area"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calculated in:"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"/>
-
-        <TextView
-            android:id="@+id/elapsed_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_gravity="center_horizontal"/>
+        </FrameLayout>
 
     </LinearLayout>
 
