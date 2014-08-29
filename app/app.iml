@@ -62,7 +62,7 @@
     <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="progressfragment-1.4.0" level="project" />
-    <orderEntry type="library" exported="" name="picasso-2.1.1" level="project" />
+    <orderEntry type="library" exported="" name="eventbus-2.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.0.0" level="project" />
     <orderEntry type="module" module-name="library" exported="" />
   </component>
