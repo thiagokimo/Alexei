@@ -40,7 +40,13 @@ public class BlurParamsFragment extends Fragment {
         mCalculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new CalculateBlurButtonClicked(mSeekBar.getProgress()));
+
+                int progress = mSeekBar.getProgress();
+
+                if (progress == 0)
+                    progress = 1;
+
+                EventBus.getDefault().post(new CalculateBlurButtonClicked(progress));
             }
         });
 

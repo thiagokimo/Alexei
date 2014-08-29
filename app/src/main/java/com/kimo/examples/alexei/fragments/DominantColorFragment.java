@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
+import com.kimo.examples.alexei.events.CalculateDominantColorClicked;
 import com.kimo.lib.alexei.Alexei;
 import com.kimo.lib.alexei.Answer;
 import com.kimo.lib.alexei.ImageProcessingThing;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Kimo on 8/19/14.
@@ -39,7 +42,23 @@ public class DominantColorFragment extends ProgressFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        performCalculus();
+        setContentShown(true);
+
+        getFragmentManager().beginTransaction().replace(R.id.info_area, new DominantColorParamsFragment()).commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -49,13 +68,15 @@ public class DominantColorFragment extends ProgressFragment {
         inflater.inflate(R.menu.main, menu);
     }
 
+    public void onEventMainThread(CalculateDominantColorClicked event) {
+        performCalculus();
+    }
+
     private void configure(View view) {
 
         setHasOptionsMenu(true);
 
         mImage = (ImageView) view.findViewById(R.id.img);
-        mDominantColorView = view.findViewById(R.id.dominant_color);
-        mElapsedTimeView = (TextView) view.findViewById(R.id.elapsed_time);
     }
 
     private void performCalculus() {
@@ -71,8 +92,7 @@ public class DominantColorFragment extends ProgressFragment {
 
                     @Override
                     public void afterExecution(Integer answer, long elapsedTime) {
-                        mDominantColorView.setBackgroundColor(answer);
-                        mElapsedTimeView.setText(new StringBuilder().append(elapsedTime));
+                        getFragmentManager().beginTransaction().replace(R.id.info_area, DominantColorResultsFragment.newInstance(answer, elapsedTime)).commit();
                         setContentShown(true);
                     }
 

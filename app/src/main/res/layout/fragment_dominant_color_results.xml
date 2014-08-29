@@ -7,37 +7,44 @@
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_below="@+id/img"
+        android:animateLayoutChanges="true"
         android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Radius:"
+            android:text="Dominant Color:"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"/>
+
+        <View
+            android:id="@+id/dominant_color"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculated in:"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"/>
 
         <TextView
-            android:id="@+id/radius_value"
+            android:id="@+id/elapsed_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"/>
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar"
-            android:max="180"
-            android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calculate"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
-
+            android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
 
