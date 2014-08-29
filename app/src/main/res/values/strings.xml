@@ -6,6 +6,7 @@
 
     <string name="title_section1">Dominant Color</string>
     <string name="title_section2">Color Pallete</string>
+    <string name="title_section3">Blur</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

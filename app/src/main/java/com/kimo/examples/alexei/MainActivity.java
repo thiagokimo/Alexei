@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 
+import com.kimo.examples.alexei.fragments.BlurFragment;
 import com.kimo.examples.alexei.fragments.ColorPaletteFragment;
 import com.kimo.examples.alexei.fragments.DominantColorFragment;
 import com.kimo.examples.alexei.fragments.NavigationDrawerFragment;
@@ -44,6 +45,13 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
                 getSupportFragmentManager()
                         .beginTransaction()
                             .replace(R.id.container, new ColorPaletteFragment(), ColorPaletteFragment.TAG)
+                        .commit();
+                break;
+
+            case NavigationDrawerFragment.FRAGMENT_BLUR:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                            .replace(R.id.container, new BlurFragment(), BlurFragment.TAG)
                         .commit();
                 break;
         }

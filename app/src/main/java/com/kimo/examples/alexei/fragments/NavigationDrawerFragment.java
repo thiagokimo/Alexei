@@ -30,6 +30,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static final int FRAGMENT_DOMINANT_COLOR = 0;
     public static final int FRAGMENT_COLOR_PALLETE = 1;
+    public static final int FRAGMENT_BLUR = 2;
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
@@ -89,6 +90,7 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[]{
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
+                        getString(R.string.title_section3)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

@@ -23,5 +23,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
     compile 'com.github.johnkil.android-progressfragment:progressfragment:1.4.+'
-    compile 'com.squareup.picasso:picasso:2.1.1@jar'
+    compile 'de.greenrobot:eventbus:2.2.1'
 }
