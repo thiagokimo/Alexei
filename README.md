@@ -72,11 +72,12 @@ Alexei.with(context)
 
 ### Predefined Calculus
 Alexei has some predefined image processing calculus that are accessible from the class
-[ImageProcessingThing](). You check them below:
+[ImageProcessingThing](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/ImageProcessingThing.java). You check them below:
 
-* [Dominant Color]()
-* [Color Palette]()
-* [Average RGB]()
+* [Dominant Color](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/DominantColor.java)
+* [Color Palette](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/ColorPalette.java)
+* [Average RGB](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/AverageColor.java)
+* [Blur](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/BlurCalculus.java)
 
 ### Custom Calculus
 
@@ -123,7 +124,7 @@ To add a new predefined calculus:
 1. Fork it
 2. Create your feature/bug-fix branch(`git checkout -b my-new-feature-or-fix`)
 3. Create your calculus inside `calculus` package.
-4. Add a flag to the new calculus in [ImageProcessingThing]()
+4. Add a flag to the new calculus in [ImageProcessingThing](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/ImageProcessingThing.java)
 5. Create a fragment in the demo app with the new calculations being applied in an image.
 6. Do your pull-request.
 
