@@ -98,7 +98,7 @@ Alexei.with(context)
                 return new YourObject();
             }
         })
-        .andGiveMe(new Answer<YourObject>() {
+        .showMe(new Answer<YourObject>() {
             @Override
             public void beforeExecution() {}
 
