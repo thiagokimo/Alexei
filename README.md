@@ -71,9 +71,8 @@ Alexei.with(context)
       });
 ```
 
-### Predefined Calculus
-Alexei has some predefined image processing calculus that are accessible from the class
-[ImageProcessingThing](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/ImageProcessingThing.java). You check them below:
+### Internal Calculus
+Alexei has some predefined image processing calculus. Check them out:
 
 * [Dominant Color](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/DominantColor.java)
 * [Color Palette](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/ColorPalette.java)
