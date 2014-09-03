@@ -56,15 +56,15 @@ public class BlurFragment extends ProgressFragment {
 
                     @Override
                     public void afterExecution(Bitmap answer, long elapsedTime) {
-                        mImageView.setImageBitmap(answer);
-                        getFragmentManager().beginTransaction().replace(R.id.info_area, ResultsFragment.newInstance(elapsedTime)).commit();
-                        setContentShown(true);
+                        try{
+                            mImageView.setImageBitmap(answer);
+                            getFragmentManager().beginTransaction().replace(R.id.info_area, ResultsFragment.newInstance(elapsedTime)).commit();
+                            setContentShown(true);
+                        } catch (NullPointerException e) {}
                     }
 
                     @Override
-                    public void ifFails(Exception error) {
-
-                    }
+                    public void ifFails(Exception error) {}
                 });
     }
 

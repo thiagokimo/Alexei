@@ -86,14 +86,14 @@ public class DominantColorFragment extends ProgressFragment {
 
                     @Override
                     public void afterExecution(Integer answer, long elapsedTime) {
-                        getFragmentManager().beginTransaction().replace(R.id.info_area, DominantColorResultsFragment.newInstance(answer, elapsedTime)).commit();
-                        setContentShown(true);
+                        try {
+                            getFragmentManager().beginTransaction().replace(R.id.info_area, DominantColorResultsFragment.newInstance(answer, elapsedTime)).commit();
+                            setContentShown(true);
+                        } catch (NullPointerException e){}
                     }
 
                     @Override
-                    public void ifFails(Exception error) {
-
-                    }
+                    public void ifFails(Exception error) {}
                 });
     }
 

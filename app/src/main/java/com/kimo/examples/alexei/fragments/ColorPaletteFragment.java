@@ -93,14 +93,14 @@ public class ColorPaletteFragment extends ProgressFragment {
                     @Override
                     public void afterExecution(List<Integer> answer, long elapsedTime) {
 
-                        getFragmentManager().beginTransaction().replace(R.id.info_area, ColorPaletteResultsFragment.newInstance((java.util.ArrayList<Integer>) answer, elapsedTime)).commit();
-                        setContentShown(true);
+                        try {
+                            getFragmentManager().beginTransaction().replace(R.id.info_area, ColorPaletteResultsFragment.newInstance((java.util.ArrayList<Integer>) answer, elapsedTime)).commit();
+                            setContentShown(true);
+                        } catch (NullPointerException e){}
                     }
 
                     @Override
-                    public void ifFails(Exception error) {
-
-                    }
+                    public void ifFails(Exception error) {}
                 });
     }
 }
