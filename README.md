@@ -29,7 +29,7 @@ Maven:
 <dependency>
     <groupId>com.github.thiagokimo</groupId>
     <artifactId>alexei-library</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
@@ -74,10 +74,11 @@ Alexei.with(context)
 ### Internal Calculus
 Alexei has some predefined image processing calculus. Check them out:
 
-* [Dominant Color](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/DominantColor.java)
-* [Color Palette](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/ColorPalette.java)
-* [Average RGB](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/AverageColor.java)
+* [Dominant Color](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/DominantColorCalculus.java)
+* [Color Palette](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/ColorPaletteCalculus.java)
+* [Average RGB](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/AverageColorCalculus.java)
 * [Blur](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/BlurCalculus.java)
+* [Grey Scale Filter](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/calculus/GreyScaleCalculus.java)
 
 ### Custom Calculus
 
@@ -124,9 +125,8 @@ To add a new predefined calculus:
 1. Fork it
 2. Create your feature/bug-fix branch(`git checkout -b my-new-feature-or-fix`)
 3. Create your calculus inside `calculus` package.
-4. Add a flag to the new calculus in [ImageProcessingThing](https://github.com/thiagokimo/Alexei/blob/master/library/src/main/java/com/kimo/lib/alexei/ImageProcessingThing.java)
-5. Create a fragment in the demo app with the new calculations being applied in an image.
-6. Do your pull-request.
+4. Create a fragment in the demo app with the new calculations being applied in an image.
+5. Do your pull-request.
 
 ### THE IMAGES OF THE DEMO APP MUST BE HOT BLOND GIRLS.
 
