@@ -16,7 +16,7 @@ import com.kimo.examples.alexei.events.CalculateColorPaletteClicked;
 import com.kimo.lib.alexei.Alexei;
 import com.kimo.lib.alexei.AlexeiUtils;
 import com.kimo.lib.alexei.Answer;
-import com.kimo.lib.alexei.calculus.ColorPalette;
+import com.kimo.lib.alexei.calculus.ColorPaletteCalculus;
 
 import java.util.List;
 
@@ -83,7 +83,7 @@ public class ColorPaletteFragment extends ProgressFragment {
 
         Alexei.with(getActivity())
                 .analize(mImage)
-                .perform(new ColorPalette(AlexeiUtils.getBitmapFromImageView(mImage),numberOfColors))
+                .perform(new ColorPaletteCalculus(AlexeiUtils.getBitmapFromImageView(mImage),numberOfColors))
                 .showMe(new Answer<List<Integer>>() {
                     @Override
                     public void beforeExecution() {

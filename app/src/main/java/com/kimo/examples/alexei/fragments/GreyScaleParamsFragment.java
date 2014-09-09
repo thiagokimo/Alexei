@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.kimo.examples.alexei.R;
-import com.kimo.examples.alexei.events.CalculateDominantColorClicked;
+import com.kimo.examples.alexei.events.CalculateGreyScaleButtonClicked;
 
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by Kimo on 8/29/14.
+ * Created by Kimo on 9/9/14.
  */
-public class DominantColorParamsFragment extends Fragment {
+public class GreyScaleParamsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class DominantColorParamsFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new CalculateDominantColorClicked());
+                EventBus.getDefault().post(new CalculateGreyScaleButtonClicked());
             }
         });
     }
