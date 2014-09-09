@@ -8,11 +8,11 @@ import com.kimo.lib.alexei.Calculus;
 /**
  * Calculates the average RGB color of an image
  */
-public class AverageColor extends Calculus<Integer> {
+public class AverageColorCalculus extends Calculus<Integer> {
 
-    public static final String TAG = AverageColor.class.getSimpleName();
+    public static final String TAG = AverageColorCalculus.class.getSimpleName();
 
-    public AverageColor(Bitmap image) {
+    public AverageColorCalculus(Bitmap image) {
         super(image);
     }
 

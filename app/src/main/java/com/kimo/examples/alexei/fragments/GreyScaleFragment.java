@@ -1,5 +1,6 @@
 package com.kimo.examples.alexei.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,29 +9,27 @@ import android.widget.ImageView;
 
 import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
-import com.kimo.examples.alexei.events.CalculateDominantColorClicked;
+import com.kimo.examples.alexei.events.CalculateGreyScaleButtonClicked;
 import com.kimo.lib.alexei.Alexei;
 import com.kimo.lib.alexei.AlexeiUtils;
 import com.kimo.lib.alexei.Answer;
-import com.kimo.lib.alexei.calculus.DominantColorCalculus;
+import com.kimo.lib.alexei.calculus.GreyScaleCalculus;
 
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by Kimo on 8/19/14.
+ * Created by Kimo on 9/9/14.
  */
-public class DominantColorFragment extends ProgressFragment {
+public class GreyScaleFragment extends ProgressFragment {
 
-    public static final String TAG = DominantColorFragment.class.getSimpleName();
+    public static final String TAG = GreyScaleFragment.class.getSimpleName();
 
-    private ImageView mImage;
+    private ImageView mImageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dominant_color, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_grey_scale, container, false);
         configure(view);
-
         return view;
     }
 
@@ -40,7 +39,7 @@ public class DominantColorFragment extends ProgressFragment {
 
         setContentShown(true);
 
-        getFragmentManager().beginTransaction().replace(R.id.info_area, new DominantColorParamsFragment()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.info_area, new GreyScaleParamsFragment()).commit();
     }
 
     @Override
@@ -57,29 +56,25 @@ public class DominantColorFragment extends ProgressFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    public void onEventMainThread(CalculateDominantColorClicked event) {
+    public void onEventMainThread(CalculateGreyScaleButtonClicked event) {
         performCalculus();
     }
 
-    private void configure(View view) {
-        mImage = (ImageView) view.findViewById(R.id.img);
-    }
-
     private void performCalculus() {
-
         Alexei.with(getActivity())
-                .analize(mImage)
-                .perform(new DominantColorCalculus(AlexeiUtils.getBitmapFromImageView(mImage)))
-                .showMe(new Answer<Integer>() {
+                .analize(mImageView)
+                .perform(new GreyScaleCalculus(AlexeiUtils.getBitmapFromImageView(mImageView)))
+                .showMe(new Answer<Bitmap>() {
                     @Override
                     public void beforeExecution() {
                         setContentShown(false);
                     }
 
                     @Override
-                    public void afterExecution(Integer answer, long elapsedTime) {
+                    public void afterExecution(Bitmap answer, long elapsedTime) {
                         try {
-                            getFragmentManager().beginTransaction().replace(R.id.info_area, DominantColorResultsFragment.newInstance(answer, elapsedTime)).commit();
+                            mImageView.setImageBitmap(answer);
+                            getFragmentManager().beginTransaction().replace(R.id.info_area, ResultsFragment.newInstance(elapsedTime)).commit();
                             setContentShown(true);
                         } catch (NullPointerException e){}
                     }
@@ -89,6 +84,7 @@ public class DominantColorFragment extends ProgressFragment {
                 });
     }
 
-
-
+    private void configure(View view) {
+        mImageView = (ImageView) view.findViewById(R.id.img);
+    }
 }

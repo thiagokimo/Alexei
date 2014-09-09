@@ -2,9 +2,6 @@ package com.kimo.lib.alexei;
 
 import android.graphics.Bitmap;
 
-import com.kimo.lib.alexei.calculus.ColorPalette;
-import com.kimo.lib.alexei.calculus.DominantColor;
-
 /**
  * Build {@link com.kimo.lib.alexei.Calculus} objects that would be dispatched over Alexei's pool thread.
  */
@@ -18,27 +15,10 @@ public class CalculusBuilder<T> {
     }
 
     /**
-     * Sets the calculus that will be done.
-     *
-     * @param predefinedCalculation is a flag that must be one of the integers in {@link com.kimo.lib.alexei.ImageProcessingThing}
-     * @return the instance of the {@link com.kimo.lib.alexei.CalculusBuilder}
+     * Performs a given calculus
+     * @param customCalculus can be a new instance of {@link com.kimo.lib.alexei.Calculus} or any object that is inside {@link com.kimo.lib.alexei.calculus}
+     * @return itself
      */
-    public CalculusBuilder<T> perform(int predefinedCalculation) {
-
-        switch (predefinedCalculation) {
-            case ImageProcessingThing.DOMINANT_COLOR:
-                calculus = new DominantColor(image);
-                break;
-            case ImageProcessingThing.COLOR_PALETTE:
-                calculus = new ColorPalette(image);
-                break;
-            default:
-                throw new IllegalArgumentException("Predefined flag is not matching");
-        }
-
-        return this;
-    }
-
     public CalculusBuilder<T> perform(Calculus<T> customCalculus) {
         calculus = customCalculus;
         return this;

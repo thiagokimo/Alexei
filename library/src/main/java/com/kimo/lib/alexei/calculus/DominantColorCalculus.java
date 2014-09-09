@@ -15,9 +15,9 @@ import java.util.Map;
 /**
  * Calculates the most common color of an image.
  */
-public class DominantColor extends Calculus<Integer> {
+public class DominantColorCalculus extends Calculus<Integer> {
 
-    public DominantColor(Bitmap image) {
+    public DominantColorCalculus(Bitmap image) {
         super(image);
     }
 

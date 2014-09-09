@@ -13,17 +13,17 @@ import java.util.List;
  * Calculates the most common colors of an image. It can be instantiated with an extra parameter that
  * represents the maximum number of colors of the palette.
  */
-public class ColorPalette extends Calculus<List<Integer>> {
+public class ColorPaletteCalculus extends Calculus<List<Integer>> {
 
     private List<Integer> mColorPallete;
     private int mNumberOfColors;
 
-    public ColorPalette(Bitmap image, int numberOfColors) {
+    public ColorPaletteCalculus(Bitmap image, int numberOfColors) {
         super(image);
         mNumberOfColors = numberOfColors;
     }
 
-    public ColorPalette(Bitmap image) {
+    public ColorPaletteCalculus(Bitmap image) {
         super(image);
     }
 

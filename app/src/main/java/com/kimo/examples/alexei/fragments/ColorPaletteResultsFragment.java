@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kimo.examples.alexei.R;
-import com.kimo.lib.alexei.calculus.ColorPalette;
+import com.kimo.lib.alexei.calculus.ColorPaletteCalculus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ColorPaletteResultsFragment extends Fragment {
 
-    public static final String TAG = ColorPalette.class.getSimpleName();
+    public static final String TAG = ColorPaletteCalculus.class.getSimpleName();
     public static final String PALETTE = TAG + ".PALETTE";
     public static final String ELAPSED_TIME = TAG + ".ELAPSED_TIME";
 
