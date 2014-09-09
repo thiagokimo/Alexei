@@ -18,6 +18,8 @@ import de.greenrobot.event.EventBus;
  */
 public class ColorPaletteParamsFragment extends Fragment {
 
+    private EditText mEditText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_palette_params, container, false);
@@ -28,15 +30,20 @@ public class ColorPaletteParamsFragment extends Fragment {
     }
 
     private void configure(View view) {
-        final EditText editText = (EditText) view.findViewById(R.id.editText);
+        mEditText= (EditText) view.findViewById(R.id.editText);
 
         Button button = (Button) view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new CalculateColorPaletteClicked(Integer.parseInt(editText.getText().toString())));
+                try {
+                    int numberOfPalettes = Integer.parseInt(mEditText.getText().toString());
+                    EventBus.getDefault().post(new CalculateColorPaletteClicked(numberOfPalettes));
+                } catch (NumberFormatException e) {
+                    mEditText.setError("Must be an integer");
+                    mEditText.requestFocus();
+                }
             }
         });
     }
-
 }
