@@ -11,7 +11,7 @@ import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
 import com.kimo.examples.alexei.events.CalculateBlurButtonClicked;
 import com.kimo.lib.alexei.Alexei;
-import com.kimo.lib.alexei.AlexeiUtils;
+import com.kimo.lib.alexei.Utils;
 import com.kimo.lib.alexei.Answer;
 import com.kimo.lib.alexei.calculus.BlurCalculus;
 
@@ -47,7 +47,7 @@ public class BlurFragment extends ProgressFragment {
     private void performCalculus(int radius) {
         Alexei.with(getActivity())
                 .analize(mImageView)
-                .perform(new BlurCalculus(AlexeiUtils.getBitmapFromImageView(mImageView),radius))
+                .perform(new BlurCalculus(Utils.getBitmapFromImageView(mImageView),radius))
                 .showMe(new Answer<Bitmap>() {
                     @Override
                     public void beforeExecution() {

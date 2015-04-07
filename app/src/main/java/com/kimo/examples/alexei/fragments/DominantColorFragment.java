@@ -10,7 +10,7 @@ import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
 import com.kimo.examples.alexei.events.CalculateDominantColorClicked;
 import com.kimo.lib.alexei.Alexei;
-import com.kimo.lib.alexei.AlexeiUtils;
+import com.kimo.lib.alexei.Utils;
 import com.kimo.lib.alexei.Answer;
 import com.kimo.lib.alexei.calculus.DominantColorCalculus;
 
@@ -69,7 +69,7 @@ public class DominantColorFragment extends ProgressFragment {
 
         Alexei.with(getActivity())
                 .analize(mImage)
-                .perform(new DominantColorCalculus(AlexeiUtils.getBitmapFromImageView(mImage)))
+                .perform(new DominantColorCalculus(Utils.getBitmapFromImageView(mImage)))
                 .showMe(new Answer<Integer>() {
                     @Override
                     public void beforeExecution() {

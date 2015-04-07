@@ -11,7 +11,7 @@ import com.devspark.progressfragment.ProgressFragment;
 import com.kimo.examples.alexei.R;
 import com.kimo.examples.alexei.events.CalculateGreyScaleButtonClicked;
 import com.kimo.lib.alexei.Alexei;
-import com.kimo.lib.alexei.AlexeiUtils;
+import com.kimo.lib.alexei.Utils;
 import com.kimo.lib.alexei.Answer;
 import com.kimo.lib.alexei.calculus.GreyScaleCalculus;
 
@@ -63,7 +63,7 @@ public class GreyScaleFragment extends ProgressFragment {
     private void performCalculus() {
         Alexei.with(getActivity())
                 .analize(mImageView)
-                .perform(new GreyScaleCalculus(AlexeiUtils.getBitmapFromImageView(mImageView)))
+                .perform(new GreyScaleCalculus(Utils.getBitmapFromImageView(mImageView)))
                 .showMe(new Answer<Bitmap>() {
                     @Override
                     public void beforeExecution() {

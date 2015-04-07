@@ -17,9 +17,9 @@ import java.util.concurrent.ThreadFactory;
 import static java.lang.Thread.MIN_PRIORITY;
 
 /**
- * Created by Kimo on 8/15/14.
+ * Orphan methods
  */
-public class AlexeiUtils {
+public class Utils {
 
     public static int [][] getPixelsMatrixFromBitmap(Bitmap bitmap) {
 

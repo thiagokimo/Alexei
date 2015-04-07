@@ -48,7 +48,7 @@ public class Alexei {
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");
 
-        mImage = AlexeiUtils.getBitmapFromImageView(image);
+        mImage = Utils.getBitmapFromImageView(image);
 
         return new CalculusBuilder(mImage);
     }

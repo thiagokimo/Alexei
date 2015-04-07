@@ -1,6 +1,10 @@
 package com.kimo.lib.alexei;
 
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Build;
+
+import java.util.concurrent.Executor;
 
 /**
  * Build {@link com.kimo.lib.alexei.Calculus} objects that would be dispatched over Alexei's pool thread.
@@ -9,6 +13,7 @@ public class CalculusBuilder<T> {
 
     private Bitmap image;
     private Calculus calculus;
+    private Executor executor;
 
     public CalculusBuilder(Bitmap image) {
         this.image = image;
@@ -32,9 +37,35 @@ public class CalculusBuilder<T> {
     public void showMe(Answer<T> callback) {
         CalculusTask<T> task = new CalculusTask(image,calculus,callback);
 
-        task.execute();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+
+            if(executor == null) {
+                executor = AsyncTask.THREAD_POOL_EXECUTOR;
+            }
+
+            task.executeOnExecutor(executor);
+        } else {
+            task.execute();
+        }
+
     }
 
+    /**
+     *
+     * Set a custom {@link Executor}
+     *
+     * @param executor your custom executor
+     * @return itself
+     */
+    public CalculusBuilder<T> withExecutor(Executor executor) {
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            this.executor = executor;
+            return this;
+        } else {
+            throw new RuntimeException("You cannot use a custom executor on pre honeycomb devices");
+        }
+
+    }
 
 }

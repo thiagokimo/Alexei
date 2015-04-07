@@ -2,7 +2,7 @@ package com.kimo.lib.alexei.calculus;
 
 import android.graphics.Bitmap;
 
-import com.kimo.lib.alexei.AlexeiUtils;
+import com.kimo.lib.alexei.Utils;
 import com.kimo.lib.alexei.Calculus;
 import com.kimo.lib.alexei.algorithms.Quantize;
 
@@ -31,7 +31,7 @@ public class ColorPaletteCalculus extends Calculus<List<Integer>> {
     protected List<Integer> theCalculation(Bitmap image) {
         mColorPallete = new ArrayList<Integer>();
 
-        int [][] pixelsMatrix = AlexeiUtils.getPixelsMatrixFromBitmap(image);
+        int [][] pixelsMatrix = Utils.getPixelsMatrixFromBitmap(image);
         int [] calculatedPalette = Quantize.quantizeImage(pixelsMatrix, mNumberOfColors);
 
         for(int x = 0; x < calculatedPalette.length; x++)
