@@ -146,7 +146,6 @@ To add a new predefined calculus:
 
 
 ## TODO
-* Figure-out a way to let Alexei perform synchronous AND/OR asynchronous calculus.
 * Feed Alexei with more predefined calculus.
 
 
