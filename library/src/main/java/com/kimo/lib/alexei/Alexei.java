@@ -43,7 +43,7 @@ public class Alexei {
      * @param image that will be passed over to {@link com.kimo.lib.alexei.CalculusBuilder}
      * @return a calculus builder object
      */
-    public CalculusBuilder analize(ImageView image) {
+    public CalculusBuilder analyze(ImageView image) {
 
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");
@@ -53,7 +53,7 @@ public class Alexei {
         return new CalculusBuilder(mImage);
     }
 
-    public CalculusBuilder analize(Bitmap image) {
+    public CalculusBuilder analyze(Bitmap image) {
 
         if(image == null)
             throw new IllegalArgumentException("Image must not be null");

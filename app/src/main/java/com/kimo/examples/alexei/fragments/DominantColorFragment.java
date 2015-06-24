@@ -68,7 +68,7 @@ public class DominantColorFragment extends ProgressFragment {
     private void performCalculus() {
 
         Alexei.with(getActivity())
-                .analize(mImage)
+                .analyze(mImage)
                 .perform(new DominantColorCalculus(Utils.getBitmapFromImageView(mImage)))
                 .showMe(new Answer<Integer>() {
                     @Override

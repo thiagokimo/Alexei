@@ -82,7 +82,7 @@ public class ColorPaletteFragment extends ProgressFragment {
     private void performCalculus(int numberOfColors) {
 
         Alexei.with(getActivity())
-                .analize(mImage)
+                .analyze(mImage)
                 .perform(new ColorPaletteCalculus(Utils.getBitmapFromImageView(mImage),numberOfColors))
                 .showMe(new Answer<List<Integer>>() {
                     @Override

@@ -46,7 +46,7 @@ public class BlurFragment extends ProgressFragment {
 
     private void performCalculus(int radius) {
         Alexei.with(getActivity())
-                .analize(mImageView)
+                .analyze(mImageView)
                 .perform(new BlurCalculus(Utils.getBitmapFromImageView(mImageView),radius))
                 .showMe(new Answer<Bitmap>() {
                     @Override

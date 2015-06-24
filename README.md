@@ -39,19 +39,19 @@ The basic API declaration is quite simple:
 
 ``` java
 Alexei.with(context)
-      .analize(image)
+      .analyze(image)
       .perform(calculus)
       .showMe(answer);
 ```
 
-It's like saying: *"Alexei, analize this image, perform some calculus
+It's like saying: *"Alexei, analyze this image, perform some calculus
 and give me the answer!"*
 
 ### Example
 
 ``` java
 Alexei.with(context)
-      .analize(imageView)
+      .analyze(imageView)
       .perform(ImageProcessingThing.DOMINANT_COLOR)
       .showMe(new Answer<Color>(){
         @Override
@@ -88,7 +88,7 @@ the object you expect to calculate. The Answer generic type must match your cust
 ``` java
 
 Alexei.with(context)
-        .analize(image)
+        .analyze(image)
         .perform(new Calculus<YourObject>() {
             @Override
             protected YourObject theCalculation(Bitmap image) {
@@ -118,7 +118,7 @@ It is also possible to let Alexei perform its calculus in a custom Executor.
 
 Alexei
     .with(context)
-    .analize(image)
+    .analyze(image)
     .perform(calculus)
     .withExecutor(YOUR_CUSTOM_EXECUTOR_HERE)
     .showMe(answer);

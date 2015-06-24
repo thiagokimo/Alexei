@@ -62,7 +62,7 @@ public class GreyScaleFragment extends ProgressFragment {
 
     private void performCalculus() {
         Alexei.with(getActivity())
-                .analize(mImageView)
+                .analyze(mImageView)
                 .perform(new GreyScaleCalculus(Utils.getBitmapFromImageView(mImageView)))
                 .showMe(new Answer<Bitmap>() {
                     @Override
