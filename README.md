@@ -19,7 +19,7 @@ Gradle:
 
 ``` groovy
 dependencies {
-    compile 'com.github.thiagokimo:alexei-library:1.3'
+    compile 'com.github.thiagokimo:alexei-library:1.4'
 }
 ```
 
@@ -29,7 +29,7 @@ Maven:
 <dependency>
     <groupId>com.github.thiagokimo</groupId>
     <artifactId>alexei-library</artifactId>
-    <version>1.3</version>
+    <version>1.4</version>
 </dependency>
 ```
 
