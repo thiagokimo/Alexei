@@ -1,5 +1,6 @@
 package com.kimo.examples.alexei;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -61,6 +62,10 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
                         .beginTransaction()
                             .replace(R.id.container, new GreyScaleFragment(), GreyScaleFragment.TAG)
                         .commit();
+                break;
+
+            case NavigationDrawerFragment.ACTIVITY_EXAMPLE_IN_ACTIVITY:
+                startActivity(new Intent(this, ExampleActivity.class));
                 break;
         }
 
